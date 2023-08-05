@@ -1,11 +1,8 @@
 class EmailAPIBase:
     """Base class for email service provider APIs."""
-    
-    def fetch_inbox(self):
-        pass
 
-    def read_email(self):
-        pass
-
-    def write_email(self):
-        pass
+    def __init__(self, email, client_id, client_secret, token_endpoint):
+        self.email = email
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.token_endpoint = token_endpoint
