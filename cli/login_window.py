@@ -13,8 +13,7 @@ class LoginWindow(Window):
     
     def main_loop(self):
         while self.is_active:
-            key = self.stdscr.getch().lower()
-            self.stdscr.clear()
-            if key == ord("q"):
+            key = self.stdscr.getch()
+            if key == ord("q") or key == ord("Q"):
                 self.close()
                 self.is_active = False
