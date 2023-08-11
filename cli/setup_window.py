@@ -2,15 +2,15 @@ import curses
 from cli.window import Window
 
 
-class LoginWindow(Window):
+class SetupWindow(Window):
     def __init__(self, stdscr):
         super().__init__(stdscr)
-
+    
     def display(self):
         self.start()
-        self.window.addstr(4, 10, "Enter your password:")
+        self.window.addstr(4, 10, "To continue, create a password:")
         self.window.refresh()
-
+    
     def get_password_input(self):
         curses.echo()
         curses.curs_set(1)

@@ -2,10 +2,11 @@ import os
 import pickle
 import hashlib
 import base64
-from getpass import getpass
+from cli.setup_window import SetupWindow
 
 class PasswordManager:
-    def __init__(self):
+    def __init__(self, stdscr):
+        self.setup_win = SetupWindow(stdscr)
         self.code_dir = os.path.dirname(os.path.abspath(__file__))
         self.password_path = os.path.join(
             self.code_dir, "config", f"password.bin"
@@ -84,7 +85,9 @@ class PasswordManager:
         if not self.verify_setup():
             salt = self.generate_salt()
             self.save_salt(salt)
-            password = getpass("Enter a password: ")
+            self.setup_win.display()
+            password = self.setup_win.get_password_input()
+            self.setup_win.close()
             self.save_password(password)
     
     def get_derived_key(self, password: str) -> bytes:
