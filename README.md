@@ -1,5 +1,5 @@
 # PyMail
-A CLI email aggregator built with Python.
+A CLI email client built with Python.
 
 ## Future Updates
 1. **Secure Info Storage:** Implement encryption/decryption to securely store users' email credentials and master password for access.
