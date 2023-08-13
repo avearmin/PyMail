@@ -53,6 +53,6 @@ class EmailClient:
             print(f"Subject: {email[0]}")
         if email[1]:
             print(f"Sender: {email[1]}")
-        if email[2][0]:
+        if email[2]:
             print(f"Content: {email[2]}")
     
