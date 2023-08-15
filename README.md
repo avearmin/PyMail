@@ -37,15 +37,20 @@ To interact with Gmail services through the CLI email client, you'll need to pro
     - Run the app and follow the prompts to paste the path to the downloaded JSON credentials file.
     - These credentials will enable the CLI email client to authenticate with Gmail services. Keep your credentials confidential and never share them publicly. Note that the app doesn't include the actual credentials, requiring you to provide them locally.
 
+## Current Features
+The email client currently supports the following features:
+1. Storage with Fernet Encryption
+    - Your email client settings and data are securely stored locally using the Fernet encryption scheme. This encryption ensures that your sensitive information remains confidential and protected even if unauthorized access occurs.
+
+2. Gmail Authentication Flow
+    - Easily authenticate with your Gmail account using the built-in authentication flow. Your credentials are handled securely, allowing you to access your Gmail inbox seamlessly.
+
+3. IMAP Connection
+    - Establish a secure IMAP connection to your Gmail account, enabling real-time access to your email messages. The IMAP protocol ensures efficient and synchronized communication between the client and your Gmail inbox.
+
 ## Future Updates
-1. **Secure Info Storage:** Implement encryption/decryption to securely store users' email credentials and master password for access.
+1. **User-API-Middleman:** Create a middleman that connects to the correct API based on the email domain to interact with different email service providers.
 
-2. **User-API-Middleman:** Create a middleman that connects to the correct API based on the email domain to interact with different email service providers.
+2. **Email Sending:** Enable users to send emails through the CLI, supporting attachments and multiple recipients.
 
-3. **Email Fetching:** Fetch emails from the connected email accounts using the respective APIs.
-
-4. **Email Parsing:** Parse email content, including headers, body, attachments (if applicable), and other metadata.
-
-5. **Email Sending:** Enable users to send emails through the CLI, supporting attachments and multiple recipients.
-
-6. **CLI Interface:** Design and implement a user-friendly command-line interface that allows users to manage multiple email accounts, view email statistics, read emails, send emails, and perform other relevant actions efficiently.
+3. **CLI Interface:** Design and implement a user-friendly command-line interface that allows users to manage multiple email accounts, view email statistics, read emails, send emails, and perform other relevant actions efficiently.
