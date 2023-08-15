@@ -19,7 +19,6 @@ class EmailService:
         self.authenticator = GmailAuthenticator(key)
         access_token = self.authenticator.authenticate()
         self.email_client.connect_to_email(access_token)
-
     
     def login(self):
         access_token = self.authenticator.authenticate()

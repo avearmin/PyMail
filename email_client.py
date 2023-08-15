@@ -1,12 +1,14 @@
 import imaplib
 import email
-import webbrowser
-import os
+from email_menu import EmailMenu
+
 
 class EmailClient:
     def __init__(self, email: str):
         self.email = email
         self.imap_server = None
+        self.email_menu = EmailMenu()
+        
     
     def connect_to_email(self, access_token: str):
         auth_string = (
