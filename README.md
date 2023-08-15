@@ -41,11 +41,9 @@ To interact with Gmail services through the CLI email client, you'll need to pro
 The email client currently supports the following features:
 1. Storage with Fernet Encryption
     - Your email client settings and data are securely stored locally using the Fernet encryption scheme. This encryption ensures that your sensitive information remains confidential and protected even if unauthorized access occurs.
-Gmail Authentication Flow
 
 2. Gmail Authentication Flow
     - Easily authenticate with your Gmail account using the built-in authentication flow. Your credentials are handled securely, allowing you to access your Gmail inbox seamlessly.
-IMAP Connection
 
 3. IMAP Connection
     - Establish a secure IMAP connection to your Gmail account, enabling real-time access to your email messages. The IMAP protocol ensures efficient and synchronized communication between the client and your Gmail inbox.
