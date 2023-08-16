@@ -25,11 +25,12 @@ class CredentialsManager:
             os.mkdir(cred_dir)
 
     def import_credentials(self, key: bytes, path: str):
-        if not os.path.exists(path):
+        expanded_path = os.path.expanduser(path)
+        if not os.path.exists(expanded_path):
             print("Credentials not found.")
             return
         credentials = self.load_credentials()
-        with open(path, "r") as json_file:
+        with open(expanded_path, "r") as json_file:
             json_data = json.load(json_file)
         credentials["client_id"] = self.encrypt(
             key, json_data["installed"]["client_id"]
