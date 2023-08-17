@@ -1,14 +1,13 @@
 import imaplib
-from email_page import EmailPage
-from email_menu import EmailMenu
+import email
 
 
 class EmailClient:
     def __init__(self, email: str):
         self.email = email
         self.imap_server = None
-        self.page = None
-        self.email_menu = EmailMenu()
+        self.total_emails = None
+        self.current_choices = None
         
     
     def connect_to_email(self, access_token: str):
@@ -17,14 +16,6 @@ class EmailClient:
         )
         self.imap_server = imaplib.IMAP4_SSL("imap.gmail.com")
         self.imap_server.authenticate(mechanism="XOAUTH2", authobject=lambda x: auth_string)
-
-    def get_inbox(self):
-        page_size = 10
-        status, total_emails = self.select_mailbox("INBOX")
-        self.page = EmailPage(self.imap_server, page_size, total_emails)
-        self.page.set_page(1)
-        self.email_menu.display_menu(self.page.items)
-
 
     def disconnect_from_email(self):
         self.imap_server.close()
@@ -35,6 +26,40 @@ class EmailClient:
         if status != 'OK':
             # TODO: curses method to print error to window
             return
-        return status, int(data[0])
-            
+        self.total_emails = int(data[0])
     
+    def get_page_of_emails(self, page_number: int) -> list:
+        items = []
+        page_size = 10
+        start = self.total_emails - ((page_number - 1) * page_size)
+        end = self.total_emails - (page_number * page_size)
+        try:
+            for i in range(start, end, -1):
+                email = self.fetch_email(i)
+                items.append(email)
+            self.current_choices = items
+            return items
+        except IndexError:
+            pass
+    
+    def fetch_email(self, email_number: int) -> tuple:
+        status, data = self.imap_server.fetch(str(email_number), "(RFC822)")
+        if status != 'OK':
+            # TODO: curses method to print error to window
+            return
+        raw_email = data[0][1]
+        message = email.message_from_bytes(raw_email)
+        subject = email.header.decode_header(message["Subject"])[0][0]
+        sender = email.utils.parseaddr(message["From"])[1]
+        content = self.get_content(message)
+        return (subject, sender, content)
+        
+    def get_content(self, message) -> str:
+        if not message.is_multipart():
+            content = message.get_payload(decode=True).decode(message.get_content_charset())
+            return content
+        for part in message.walk():
+            content_type = part.get_content_type()
+            if "text/plain" == content_type:
+                content = part.get_payload(decode=True).decode(part.get_content_charset())
+                return content
