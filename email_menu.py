@@ -37,7 +37,7 @@ class EmailMenu:
         urwid.MainLoop(top, unhandled_input=self.key_handler).run()
 
     def key_handler(self, key_press):
-        if key_press == 'q' or key_press == 'Q':
+        if key_press == 'ctrl x':
             if self.view_name == self.__MENU:
                 raise urwid.ExitMainLoop()
             if self.view_name == self.__READ_EMAIL:
