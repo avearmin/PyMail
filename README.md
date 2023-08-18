@@ -48,6 +48,12 @@ The email client currently supports the following features:
 3. IMAP Connection
     - Establish a secure IMAP connection to your Gmail account, enabling real-time access to your email messages. The IMAP protocol ensures efficient and synchronized communication between the client and your Gmail inbox.
 
+4. Inbox Display and Email Selection
+    - View your inbox directly within the email client's interface. Browse through your emails with ease and select the ones you want to interact with.
+
+5. Email Content Display in Plaintext
+    - When selecting an email, its contents are displayed in plaintext format, making it convenient to read and understand the message's content.
+
 ## Future Updates
 1. **User-API-Middleman:** Create a middleman that connects to the correct API based on the email domain to interact with different email service providers.
 
