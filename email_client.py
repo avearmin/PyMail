@@ -1,5 +1,6 @@
 import imaplib
 import email
+from math import ceil
 
 
 class EmailClient:
@@ -7,6 +8,8 @@ class EmailClient:
         self.email = email
         self.imap_server = None
         self.total_emails = None
+        self.page_size = 20
+        self.current_page_num = 1
         self.current_choices = None
         
     
@@ -28,11 +31,10 @@ class EmailClient:
             return
         self.total_emails = int(data[0])
     
-    def get_page_of_emails(self, page_number: int) -> list:
+    def get_page_of_emails(self) -> list:
         items = []
-        page_size = 10
-        start = self.total_emails - ((page_number - 1) * page_size)
-        end = self.total_emails - (page_number * page_size)
+        start = self.total_emails - ((self.current_page_num - 1) * self.page_size)
+        end = self.total_emails - (self.current_page_num * self.page_size)
         try:
             for i in range(start, end, -1):
                 email = self.fetch_email(i)
@@ -41,6 +43,21 @@ class EmailClient:
             return items
         except IndexError:
             pass
+    
+    def get_next_page_of_emails(self):
+        if self.current_page_num == self.get_total_num_pages():
+            return
+        self.current_page_num += 1
+        return self.get_page_of_emails()
+
+    def get_prev_page_of_emails(self):
+        if self.current_page_num == 1:
+            return
+        self.current_page_num -= 1
+        return self.get_page_of_emails()
+    
+    def get_total_num_pages(self):
+        return ceil(self.total_emails / self.page_size)
     
     def fetch_email(self, email_number: int) -> tuple:
         status, data = self.imap_server.fetch(str(email_number), "(RFC822)")

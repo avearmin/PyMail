@@ -15,8 +15,9 @@ class EmailService:
     def start(self):
         self.login()
         self.email_client.select_mailbox("INBOX")
-        page_1 = self.email_client.get_page_of_emails(1)
+        page_1 = self.email_client.get_page_of_emails()
         self.display_menu(page_1)
+        self.email_menu.loop.run()
 
     def login(self):
         self.pass_manager.setup()
@@ -42,4 +43,13 @@ class EmailService:
                 raise ExitMainLoop()
             if self.email_menu.view_name == "READ":
                 self.display_menu(self.email_client.current_choices)
-    
+        if key_press == 'right':
+                next_page = self.email_client.get_next_page_of_emails()
+                if next_page is None:
+                    return
+                self.display_menu(next_page)
+        if key_press == 'left':
+                prev_page = self.email_client.get_prev_page_of_emails()
+                if prev_page is None:
+                    return
+                self.display_menu(prev_page)

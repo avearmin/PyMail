@@ -21,7 +21,7 @@ class EmailMenu:
             min_width=20, min_height=9)
         self.view_name = "MENU"
         self.loop.widget = top
-        self.loop.run()
+        
 
     def get_menu(self, choices):
         body = [urwid.Text("test"), urwid.Divider()]
@@ -40,4 +40,4 @@ class EmailMenu:
         top = urwid.Filler(pile, valign="top")
         self.view_name = "READ"
         self.loop.widget = top
-        self.loop.run()
+
