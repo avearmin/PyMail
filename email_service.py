@@ -52,12 +52,16 @@ class EmailService:
             self.display_menu(self.email_client.current_choices)
     
     def handle_right_arrow(self):
+        if self.email_menu.view_name != "MENU":
+            return
         next_page = self.email_client.get_next_page_of_emails()
         if next_page is None:
             return
         self.display_menu(next_page)
     
     def handle_left_arrow(self):
+        if self.email_menu.view_name != "MENU":
+            return
         prev_page = self.email_client.get_prev_page_of_emails()
         if prev_page is None:
             return
