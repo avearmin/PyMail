@@ -38,18 +38,27 @@ class EmailService:
     
     def key_handler(self, key_press):
         if key_press == 'ctrl x':
-            if self.email_menu.view_name == "MENU":
-                self.logout()
-                raise ExitMainLoop()
-            if self.email_menu.view_name == "READ":
-                self.display_menu(self.email_client.current_choices)
+            self.handle_ctrl_x()
         if key_press == 'right':
-                next_page = self.email_client.get_next_page_of_emails()
-                if next_page is None:
-                    return
-                self.display_menu(next_page)
+            self.handle_right_arrow()
         if key_press == 'left':
-                prev_page = self.email_client.get_prev_page_of_emails()
-                if prev_page is None:
-                    return
-                self.display_menu(prev_page)
+            self.handle_left_arrow()
+    
+    def handle_ctrl_x(self):
+        if self.email_menu.view_name == "MENU":
+            self.logout()
+            raise ExitMainLoop()
+        if self.email_menu.view_name == "READ":
+            self.display_menu(self.email_client.current_choices)
+    
+    def handle_right_arrow(self):
+        next_page = self.email_client.get_next_page_of_emails()
+        if next_page is None:
+            return
+        self.display_menu(next_page)
+    
+    def handle_left_arrow(self):
+        prev_page = self.email_client.get_prev_page_of_emails()
+        if prev_page is None:
+            return
+        self.display_menu(prev_page)
