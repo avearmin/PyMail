@@ -7,7 +7,7 @@ from email_menu import EmailMenu
 
 
 class EmailService:
-    def __init__(self, email):
+    def __init__(self, email: str):
         self.pass_manager = PasswordManager()
         self.email_client = EmailClient(email)
         self.email_menu = EmailMenu(self.key_handler)
@@ -33,10 +33,10 @@ class EmailService:
     def logout(self):
         self.email_client.disconnect_from_email()
     
-    def display_menu(self, choices):
-        self.email_menu.set_menu_view(choices)
+    def display_menu(self, emails: list):
+        self.email_menu.set_menu_view(emails)
     
-    def key_handler(self, key_press):
+    def key_handler(self, key_press: str):
         if key_press == 'ctrl x':
             self.handle_ctrl_x()
         if key_press == 'right':
