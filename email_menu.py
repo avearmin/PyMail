@@ -32,12 +32,14 @@ class EmailMenu:
         return urwid.ListBox(urwid.SimpleFocusListWalker(body))
     
     def set_email_view(self, button, email):
-        subject = urwid.Text(email[0])
-        sender = urwid.Text(email[1])
-        content = urwid.Text(email[2])
-        div = urwid.Divider()
-        pile = urwid.Pile([sender, div, subject, div, content])
-        top = urwid.Filler(pile, valign="top")
+        top = self.stack_email_sections(email)
         self.view_name = "READ"
         self.loop.widget = top
+    
+    def stack_email_sections(self, email):
+        body = [urwid.Text("test"), urwid.Divider()]
+        for section in email:
+            body.append(urwid.Text(section))
+            body.append(urwid.Divider())
+        return urwid.ListBox(urwid.SimpleFocusListWalker(body))
 
