@@ -31,8 +31,8 @@ class EmailMenu:
             body.append(urwid.AttrMap(button, None, focus_map='reversed'))
         return urwid.ListBox(urwid.SimpleFocusListWalker(body))
     
-    def set_email_view(self, button, emails: list):
-        top = self.stack_email_sections(emails)
+    def set_email_view(self, button, email: tuple):
+        top = self.stack_email_sections(email)
         self.view_name = 'READ'
         self.loop.widget = top
     

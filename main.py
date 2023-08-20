@@ -1,4 +1,5 @@
 from email_service import EmailService
 
-e = EmailService("Arminradoncic1@gmail.com")
+email = input('Enter a google email: ')
+e = EmailService(email)
 e.start()
