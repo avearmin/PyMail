@@ -44,13 +44,13 @@ class EmailClient:
         except IndexError:
             pass
     
-    def get_next_page_of_emails(self):
+    def get_next_page_of_emails(self) -> list:
         if self.current_page_num == self.get_total_num_pages():
             return
         self.current_page_num += 1
         return self.get_page_of_emails()
 
-    def get_prev_page_of_emails(self):
+    def get_prev_page_of_emails(self) -> list:
         if self.current_page_num == 1:
             return
         self.current_page_num -= 1
