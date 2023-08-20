@@ -12,9 +12,9 @@ class EmailMenu:
         top = self.get_menu([])
         self.loop = urwid.MainLoop(top, unhandled_input=self.key_handler)
 
-    def set_menu_view(self, choices):
-        self.current_choices = choices
-        main = urwid.Padding(self.get_menu(choices), left=2, right=2)
+    def set_menu_view(self, emails: list):
+        self.current_choices = emails
+        main = urwid.Padding(self.get_menu(emails), left=2, right=2)
         top = urwid.Overlay(main, urwid.SolidFill(u'\N{MEDIUM SHADE}'),
             align='center', width=('relative', 60),
             valign='middle', height=('relative', 60),
@@ -23,20 +23,20 @@ class EmailMenu:
         self.loop.widget = top
         
 
-    def get_menu(self, choices):
+    def get_menu(self, emails: list) -> urwid.ListBox:
         body = [urwid.Text('test'), urwid.Divider()]
-        for c in choices:
+        for email in emails:
             button = urwid.Button(str(c[1]) + ": " + str(c[0]))
-            urwid.connect_signal(button, 'click', self.set_email_view, c)
+            urwid.connect_signal(button, 'click', self.set_email_view, email)
             body.append(urwid.AttrMap(button, None, focus_map='reversed'))
         return urwid.ListBox(urwid.SimpleFocusListWalker(body))
     
-    def set_email_view(self, button, email):
-        top = self.stack_email_sections(email)
+    def set_email_view(self, button, emails: list):
+        top = self.stack_email_sections(emails)
         self.view_name = 'READ'
         self.loop.widget = top
     
-    def stack_email_sections(self, email):
+    def stack_email_sections(self, email) -> urwid.ListBox:
         body = [urwid.Text('test'), urwid.Divider()]
         for section in email:
             body.append(urwid.Text(section))
