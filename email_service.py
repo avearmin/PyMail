@@ -14,7 +14,7 @@ class EmailService:
     
     def start(self):
         self.login()
-        self.email_client.select_mailbox("INBOX")
+        self.email_client.select_mailbox('INBOX')
         page_1 = self.email_client.get_page_of_emails()
         self.display_menu(page_1)
         self.email_menu.loop.run()
@@ -23,7 +23,7 @@ class EmailService:
         self.pass_manager.setup()
         password = getpass()
         while not self.pass_manager.verify_password(password):
-            print("Enter the correct password.")
+            print('Enter the correct password.')
             password = getpass()
         key = self.pass_manager.get_derived_key(password)
         self.authenticator = GmailAuthenticator(key)
@@ -45,14 +45,14 @@ class EmailService:
             self.handle_left_arrow()
     
     def handle_ctrl_x(self):
-        if self.email_menu.view_name == "MENU":
+        if self.email_menu.view_name == 'MENU':
             self.logout()
             raise ExitMainLoop()
-        if self.email_menu.view_name == "READ":
+        if self.email_menu.view_name == 'READ':
             self.display_menu(self.email_client.current_choices)
     
     def handle_right_arrow(self):
-        if self.email_menu.view_name != "MENU":
+        if self.email_menu.view_name != 'MENU':
             return
         next_page = self.email_client.get_next_page_of_emails()
         if next_page is None:
@@ -60,7 +60,7 @@ class EmailService:
         self.display_menu(next_page)
     
     def handle_left_arrow(self):
-        if self.email_menu.view_name != "MENU":
+        if self.email_menu.view_name != 'MENU':
             return
         prev_page = self.email_client.get_prev_page_of_emails()
         if prev_page is None:

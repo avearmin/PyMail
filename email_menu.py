@@ -19,12 +19,12 @@ class EmailMenu:
             align='center', width=('relative', 60),
             valign='middle', height=('relative', 60),
             min_width=20, min_height=9)
-        self.view_name = "MENU"
+        self.view_name = 'MENU'
         self.loop.widget = top
         
 
     def get_menu(self, choices):
-        body = [urwid.Text("test"), urwid.Divider()]
+        body = [urwid.Text('test'), urwid.Divider()]
         for c in choices:
             button = urwid.Button(str(c[1]) + ": " + str(c[0]))
             urwid.connect_signal(button, 'click', self.set_email_view, c)
@@ -33,11 +33,11 @@ class EmailMenu:
     
     def set_email_view(self, button, email):
         top = self.stack_email_sections(email)
-        self.view_name = "READ"
+        self.view_name = 'READ'
         self.loop.widget = top
     
     def stack_email_sections(self, email):
-        body = [urwid.Text("test"), urwid.Divider()]
+        body = [urwid.Text('test'), urwid.Divider()]
         for section in email:
             body.append(urwid.Text(section))
             body.append(urwid.Divider())

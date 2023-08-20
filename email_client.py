@@ -15,10 +15,10 @@ class EmailClient:
     
     def connect_to_email(self, access_token: str):
         auth_string = (
-            "user=" + self.email + "\x01auth=Bearer " + access_token + "\x01\x01"
+            'user=' + self.email + '\x01auth=Bearer ' + access_token + '\x01\x01'
         )
-        self.imap_server = imaplib.IMAP4_SSL("imap.gmail.com")
-        self.imap_server.authenticate(mechanism="XOAUTH2", authobject=lambda x: auth_string)
+        self.imap_server = imaplib.IMAP4_SSL('imap.gmail.com')
+        self.imap_server.authenticate(mechanism='XOAUTH2', authobject=lambda x: auth_string)
 
     def disconnect_from_email(self):
         self.imap_server.close()
@@ -66,8 +66,8 @@ class EmailClient:
             return
         raw_email = data[0][1]
         message = email.message_from_bytes(raw_email)
-        subject = email.header.decode_header(message["Subject"])[0][0]
-        sender = email.utils.parseaddr(message["From"])[1]
+        subject = email.header.decode_header(message['Subject'])[0][0]
+        sender = email.utils.parseaddr(message['From'])[1]
         content = self.get_content(message)
         return (subject, sender, content)
         
@@ -77,6 +77,6 @@ class EmailClient:
             return content
         for part in message.walk():
             content_type = part.get_content_type()
-            if "text/plain" == content_type:
+            if 'text/plain' == content_type:
                 content = part.get_payload(decode=True).decode(part.get_content_charset())
                 return content
