@@ -26,7 +26,7 @@ class EmailMenu:
     def get_menu(self, emails: list) -> urwid.ListBox:
         body = [urwid.Text('test'), urwid.Divider()]
         for email in emails:
-            button = urwid.Button(str(c[1]) + ": " + str(c[0]))
+            button = urwid.Button(str(email[1]) + ": " + str(email[0]))
             urwid.connect_signal(button, 'click', self.set_email_view, email)
             body.append(urwid.AttrMap(button, None, focus_map='reversed'))
         return urwid.ListBox(urwid.SimpleFocusListWalker(body))
