@@ -20,7 +20,6 @@ class EmailClient:
         auth_string = (
             'user=' + self.email + '\x01auth=Bearer ' + access_token + '\x01\x01'
         )
-        base64_auth_string = base64.b64encode(auth_string.encode()).decode()
         self.imap_server = imaplib.IMAP4_SSL('imap.gmail.com')
         self.imap_server.authenticate(mechanism='XOAUTH2', authobject=lambda x: auth_string)
         self.smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)

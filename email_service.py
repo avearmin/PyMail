@@ -85,23 +85,24 @@ class EmailService:
         temp = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
         temp.close()
         return temp.name
-    
-    def get_email_contents(self, temp_file_name):
+
+    def get_email_contents(self, temp_file_name: str) -> list[str]:
         with open(temp_file_name) as file:
             email_contents = file.read()
         return email_contents.split('\n\n')
     
-    def prepare_and_send_email(self, email_contents):
+    def prepare_and_send_email(self, email_contents: list[str]):
         to_addrs = email_contents[0]
         subject = email_contents[1]
         message = email_contents[2]
         email_formatted_as_string = self.format_email_as_string(to_addrs, subject, message)
         self.email_client.send_email(to_addrs, email_formatted_as_string)
 
-    def format_email_as_string(self, to_addrs, subject, message):
+    def format_email_as_string(self, to_addrs: str, subject: str, message: str):
         return (
             f'From: {self.email}\r\n'
             f'To: {to_addrs}\r\n'
             f'Subject: {subject}\r\n\r\n'
             f'{message}'
         )
+
