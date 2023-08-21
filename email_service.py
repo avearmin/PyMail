@@ -74,6 +74,8 @@ class EmailService:
     
     def handle_ctrl_r(self):
         temp = self.get_temp_file()
+        if self.email_menu.view_name == 'READ':
+            self.add_reply_addr_to_temp(temp)
         subprocess.call(['nano', temp])
         email_contents = self.get_email_contents(temp)
         if len(email_contents) != 3:
@@ -105,4 +107,7 @@ class EmailService:
             f'Subject: {subject}\r\n\r\n'
             f'{message}'
         )
-
+    
+    def add_reply_addr_to_temp(self, temp_file_name: str):
+        with open(temp_file_name, 'w') as file:
+            file.write(self.email_menu.current_reply_addr + '\n\n')

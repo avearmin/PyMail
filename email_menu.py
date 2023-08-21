@@ -4,6 +4,7 @@ import urwid
 class EmailMenu:
     def __init__(self, key_handler_callback):
         self.view_name = None
+        self.current_reply_addr = None
         self.loop = None
         self.key_handler = key_handler_callback
         self.start_main_loop()
@@ -31,6 +32,7 @@ class EmailMenu:
         return urwid.ListBox(urwid.SimpleFocusListWalker(body))
     
     def set_email_view(self, button, email: tuple):
+        self.current_reply_addr = email[1]
         top = self.stack_email_sections(email)
         self.view_name = 'READ'
         self.loop.widget = top
