@@ -73,22 +73,35 @@ class EmailService:
         self.display_menu(prev_page)
     
     def handle_ctrl_r(self):
+        temp = self.get_temp_file()
+        subprocess.call(['nano', temp])
+        email_contents = self.get_email_contents(temp)
+        if len(email_contents) != 3:
+            return
+        self.prepare_and_send_email(email_contents)
+        self.display_menu(self.email_client.current_choices)
+
+    def get_temp_file(self):
         temp = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
-        temp_name = temp.name
         temp.close()
-        subprocess.call(['nano', temp_name])
-        with open(temp_name) as file:
+        return temp.name
+    
+    def get_email_contents(self, temp_file_name):
+        with open(temp_file_name) as file:
             email_contents = file.read()
-        e = email_contents.split('\n\n')
-        to_addrs = e[0]
-        subject = e[1]
-        message = e[2]
-        email_formatted_as_string = (
+        return email_contents.split('\n\n')
+    
+    def prepare_and_send_email(self, email_contents):
+        to_addrs = email_contents[0]
+        subject = email_contents[1]
+        message = email_contents[2]
+        email_formatted_as_string = self.format_email_as_string(to_addrs, subject, message)
+        self.email_client.send_email(to_addrs, email_formatted_as_string)
+
+    def format_email_as_string(self, to_addrs, subject, message):
+        return (
             f'From: {self.email}\r\n'
             f'To: {to_addrs}\r\n'
             f'Subject: {subject}\r\n\r\n'
             f'{message}'
         )
-        self.email_client.send_email(to_addrs, email_formatted_as_string)
-        self.display_menu(self.email_client.current_choices)
-        
