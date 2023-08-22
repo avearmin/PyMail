@@ -1,5 +1,4 @@
-from email_service import EmailService
+from arg_parser import ArgParser
 
-email = input('Enter a google email: ')
-e = EmailService(email)
-e.start()
+a = ArgParser()
+a.parse_arguments()
