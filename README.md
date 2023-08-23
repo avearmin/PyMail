@@ -1,7 +1,23 @@
 # PyMail
 A CLI email client built with Python.
 
-## Setting Up Credentials for Google API Access
+## Setting Up The Email Client
+This section will guide you through the setup process, including cloning the repository, setting up a permanent alias for convenient access, and getting credentials from the google dev console for API access.
+
+### Dependencies
+
+- cryptography
+- requests
+- urwid
+
+You can install these dependencies using pip:
+```bash
+pip install cryptography
+pip install requests
+pip install urwid
+```
+
+### Setting Up Credentials for Google API Access
 To interact with Gmail services through the CLI email client, you'll need to provide your own credentials obtained from the Google Developer Console. Here's how you can do it:
 
 1. Access the Google Developer Console: Navigate to the Google Developer Console.
@@ -54,9 +70,3 @@ The email client currently supports the following features:
 5. Email Content Display in Plaintext
     - When selecting an email, its contents are displayed in plaintext format, making it convenient to read and understand the message's content.
 
-## Future Updates
-1. **User-API-Middleman:** Create a middleman that connects to the correct API based on the email domain to interact with different email service providers.
-
-2. **Email Sending:** Enable users to send emails through the CLI, supporting attachments and multiple recipients.
-
-3. **CLI Interface:** Design and implement a user-friendly command-line interface that allows users to manage multiple email accounts, view email statistics, read emails, send emails, and perform other relevant actions efficiently.
