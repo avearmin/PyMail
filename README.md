@@ -98,6 +98,17 @@ To interact with Gmail services through the CLI email client, you'll need to pro
     - Run the app and follow the prompts to paste the path to the downloaded JSON credentials file.
     - These credentials will enable the CLI email client to authenticate with Gmail services. Keep your credentials confidential and never share them publicly. Note that the app doesn't include the actual credentials, requiring you to provide them locally.
 
+## Logging In
+
+To login first add your email using the `add` command then use the `login` command:
+```bash
+pymail add some@email.com
+pymail login
+```
+
+If its your first time using the client, you will be prompted to create a password, give access, and import credentials. You only have to do this once.
+
+
 ## Current Features
 The email client currently supports the following features:
 1. Storage with Fernet Encryption
