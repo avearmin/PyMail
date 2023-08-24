@@ -47,7 +47,7 @@ source ~/.bashrc
 
 ### Troubleshooting: Permission Denied Error
 
-If you encounter a "permission denied" error when trying to run the Password Manager, it might be due to the lack of execution permissions on the `main.py` file. To resolve this issue, follow these steps:
+If you encounter a "permission denied" error when trying to run the mail client, it might be due to the lack of execution permissions on the `main.py` file. To resolve this issue, follow these steps:
 
 Open your terminal or command prompt. Navigate to the directory where the `main.py` file is located using the `cd` command:
 ```bash
