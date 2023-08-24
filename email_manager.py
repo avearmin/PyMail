@@ -5,7 +5,7 @@ class EmailManager:
     def __init__(self):
         self.code_dir = os.path.dirname(os.path.abspath(__file__))
         self.email_path = os.path.join(
-            self.code_dir, 'config', f'email.txt'
+            self.code_dir, 'config', 'email.txt'
         )
     
     def verify_config_dir(self):
@@ -22,6 +22,7 @@ class EmailManager:
         return email
     
     def save_email(self, email: str):
+        self.verify_config_dir()
         with open(self.email_path, 'w') as file:
             file.write(email)
 

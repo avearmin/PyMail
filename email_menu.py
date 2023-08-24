@@ -24,7 +24,11 @@ class EmailMenu:
         self.loop.widget = top
 
     def get_menu(self, emails: list) -> urwid.ListBox:
-        body = [urwid.Text('test'), urwid.Divider()]
+        key_text = ('UP prev email DOWN next email\n'
+            'LEFT prev page RIGHT next page\n'
+            '^x exit ^r send email'
+        )
+        body = [urwid.Text(key_text), urwid.Divider()]
         for email in emails:
             button = urwid.Button(str(email[1]) + ": " + str(email[0]))
             urwid.connect_signal(button, 'click', self.set_email_view, email)
@@ -38,7 +42,8 @@ class EmailMenu:
         self.loop.widget = top
     
     def stack_email_sections(self, email) -> urwid.ListBox:
-        body = [urwid.Text('test'), urwid.Divider()]
+        key_text = '^x back to mail list ^r reply'
+        body = [urwid.Text(key_text), urwid.Divider()]
         for section in email:
             body.append(urwid.Text(section))
             body.append(urwid.Divider())
