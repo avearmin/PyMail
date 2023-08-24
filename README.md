@@ -17,6 +17,51 @@ pip install requests
 pip install urwid
 ```
 
+### Creating a Permanent Alias
+For convenience, you can create a permanent alias that allows you to access the mail client from any directory in your terminal.
+
+Open your terminal and navigate to your home directory:
+```bash
+cd ~
+```
+Edit your shell profile file. Depending on the shell you're using (bash, zsh, etc.), the file could be one of the following:
+
+- For bash, use ~/.bashrc or ~/.bash_profile
+- For zsh, use ~/.zshrc
+
+For example, if you're using bash:
+```bash
+nano ~/.bashrc
+```
+
+Add the following line at the end of the file to create an alias:
+```bash
+alias pymail="python /path/to/PyMail/main.py"
+```
+Replace /path/to/PyMail with the actual path to the directory where you cloned the repository.
+1. Save and close the file (for nano, press Ctrl + X, then Y, and finally Enter).
+2. To apply the changes, either restart your terminal or run the following command:
+```bash
+source ~/.bashrc
+```
+
+### Troubleshooting: Permission Denied Error
+
+If you encounter a "permission denied" error when trying to run the Password Manager, it might be due to the lack of execution permissions on the `main.py` file. To resolve this issue, follow these steps:
+
+Open your terminal or command prompt. Navigate to the directory where the `main.py` file is located using the `cd` command:
+```bash
+cd/path/to/PyMail
+   ```
+Check the current permissions on the `main.py` file using the `ls -l` command:
+```bash
+ls -l main.py
+```
+Ensure that the file has the necessary execution permissions. If it doesn't, you can add them using the chmod command:
+```bash
+chmod +x main.py
+```
+
 ### Setting Up Credentials for Google API Access
 To interact with Gmail services through the CLI email client, you'll need to provide your own credentials obtained from the Google Developer Console. Here's how you can do it:
 
